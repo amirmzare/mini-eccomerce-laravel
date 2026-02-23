@@ -14,7 +14,7 @@ if (!function_exists("activeSort")) {
         $default = "newest";
 
         if (!$request->filled('sort')) {
-            if($type == $default) {
+            if ($type == $default) {
                 return 'text-blue-500';
             }
             return null;
@@ -34,5 +34,21 @@ if (!function_exists("generateSortRoute")) {
 
         return $queries;
 
+    }
+}
+if (!function_exists("getUserFullName")) {
+    function getUserFullName(): string
+    {
+
+        return auth()->user()->first_name . " " . auth()->user()->last_name;
+    }
+}
+if (!function_exists("activeAccountSidebar")) {
+    function activeAccountSidebar(string $routName): string
+    {
+        if (\Illuminate\Support\Facades\Route::currentRouteName() == $routName) {
+            return 'bg-blue-500/10 text-blue-500';
+        }
+        return "hover:text-blue-500";
     }
 }

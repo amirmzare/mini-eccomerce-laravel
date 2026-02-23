@@ -16,7 +16,7 @@ class ProductController extends Controller
             ->applyFilter()
             ->applySearch()
             ->where('status', '=', ProductStatus::ENABLE)
-            ->paginate()
+            ->paginate(1)
             ->withQueryString();
 
         $productCategories = ProductCategory::all();
