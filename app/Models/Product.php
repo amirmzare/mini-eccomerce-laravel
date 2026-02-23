@@ -68,29 +68,29 @@ class Product extends Model
         $request = request();
 
 //        if ($request->filled('sort')) {
-            switch ($request->input('sort')) {
+        switch ($request->input('sort')) {
 
-                case 'best_selling' :
-                {
-                    $query
-                        ->withSum('orderItems', 'qty')
-                        ->orderByDesc('order_items_sum_qty');
-                    break;
-                }
-                case 'lowest' :
-                {
-                    $query->orderBy('price');
-                    break;
-                }
-                case 'highest' :
-                {
-                    $query->orderByDesc('price');
-                    break;
-                }
-                default:
-                {
-                    $query->orderByDesc('created_at');
-                }
+            case 'best_selling' :
+            {
+                $query
+                    ->withSum('orderItems', 'qty')
+                    ->orderByDesc('order_items_sum_qty');
+                break;
+            }
+            case 'lowest' :
+            {
+                $query->orderBy('price');
+                break;
+            }
+            case 'highest' :
+            {
+                $query->orderByDesc('price');
+                break;
+            }
+            default:
+            {
+                $query->orderByDesc('created_at');
+            }
 //            }
         }
     }
@@ -108,6 +108,23 @@ class Product extends Model
             $categoryIds = array_keys($request->input('category_id'));
 
             $query->whereIn('product_category_id', $categoryIds);
+        }
+
+    }
+
+    #[Scope]
+    protected function applySearch(Builder $query): void
+    {
+        $request = request();
+
+        if ($request->filled('keyword')) {
+            $keyword = $request->input('keyword');
+
+            $query->whereAny([
+                'name',
+                "name_en",
+                'description'
+            ], 'LIKE', "%$keyword%");
         }
 
     }
