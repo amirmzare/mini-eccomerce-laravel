@@ -2,19 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
+use App\Http\Requests\OrderPostRequest;
+use App\Services\CartService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $userOrders = Order::query()
-            ->where('user_id' , '=' , Auth::id())
-            ->orderByDesc('created_at')
-            ->paginate();
+        $userCartItems = CartService::getItemsWithDetails();
 
-        return view('account.orders',compact('userOrders'));
+        $getTotalPrices = CartService::getTotalPrices();
+
+        return view('cart', compact('userCartItems','getTotalPrices'));
+    }
+
+    public function add(OrderPostRequest $request)
+    {
+        CartService::add(
+            $request->input('product_id'),
+            $request->input('qty')
+        );
+
+        return redirect()->back();
+    }
+
+    public function removeItem(int $productId)
+    {
+        CartService::remove($productId);
+
+        return back();
+    }
+
+    public function clear()
+    {
+        CartService::clear();
+
+        return back();
+    }
+
+    public function updateQty(Request $request)
+    {
+        $cartItems = $request->input('cart_items');
+
+        foreach ($cartItems as $cartItem) {
+            CartService::updateQty($cartItem['product_id'], $cartItem['qty']);
+        }
+
+        return back();
     }
 }

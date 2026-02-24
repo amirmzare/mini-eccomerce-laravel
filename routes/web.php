@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\account\OrderController as AccountOrderController;
 use App\Http\Controllers\EditProfileController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OrderController;
@@ -18,7 +19,7 @@ Route::prefix('products')->controller(ProductController::class)->name('products.
 
 Route::prefix('account')->name('account.')->middleware('auth')->group(function () {
 
-    Route::get('orders',[OrderController::class,'index'])->name('orders');
+    Route::get('orders',[AccountOrderController::class,'index'])->name('orders');
 
     Route::prefix('edit-profile')->name('edit-profile.')->controller(EditProfileController::class)->group(function () {
 
@@ -26,5 +27,16 @@ Route::prefix('account')->name('account.')->middleware('auth')->group(function (
         Route::post('/','post')->name('post');
 
     });
+
+});
+
+Route::prefix('cart')->name('cart.')->controller(OrderController::class)->middleware('auth')->group(function (){
+
+    Route::get('/','index')->name('index');
+    Route::post('add','add')->name('add');
+    Route::get('clear','clear')->name('clear');
+    Route::post('update-qty','updateQty')->name('update-qty');
+    Route::get('{productId}/remove','removeItem')->name('remove-item');
+
 
 });

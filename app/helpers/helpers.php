@@ -52,3 +52,21 @@ if (!function_exists("activeAccountSidebar")) {
         return "hover:text-blue-500";
     }
 }
+
+if (!function_exists("getUserCartCount")) {
+    function getUserCartCount(): int
+    {
+        return \App\Services\CartService::getCount();
+    }
+}
+
+if (!function_exists("iconCartCount")) {
+    function iconCartCount(): string
+    {
+        if (getUserCartCount() > 0) {
+            return 'bg-blue-600';
+        }
+        return 'app-border';
+    }
+}
+

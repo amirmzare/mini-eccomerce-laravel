@@ -52,7 +52,7 @@
 <script src="{{asset('assets/scripts/app.js')}}"></script>
 <script type="module" src="{{asset('assets/scripts/slider.js')}}"></script>
 
-
+@stack('js')
 
 </body>
 </html>

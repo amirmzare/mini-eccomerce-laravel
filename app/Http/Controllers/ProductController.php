@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ProductStatus;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -34,7 +35,7 @@ class ProductController extends Controller
             ->get();
 
 
-        return view('products.show', compact('product','relatedProducts'));
+        return view('products.show', compact('product','relatedProducts',));
     }
 
     public function removeFilter(Request $request)
