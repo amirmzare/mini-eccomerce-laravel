@@ -16,7 +16,7 @@ class ProductController extends Controller
             ->applyFilter()
             ->applySearch()
             ->where('status', '=', ProductStatus::ENABLE)
-            ->paginate(1)
+            ->paginate()
             ->withQueryString();
 
         $productCategories = ProductCategory::all();
@@ -35,5 +35,15 @@ class ProductController extends Controller
 
 
         return view('products.show', compact('product','relatedProducts'));
+    }
+
+    public function removeFilter(Request $request)
+    {
+        $inputs = $request->all();
+
+        unset($inputs['exists']);
+        unset($inputs['category_id']);
+
+        return redirect()->route('products.index',$inputs);
     }
 }

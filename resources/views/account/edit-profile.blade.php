@@ -181,8 +181,11 @@
             <br>
             <br>
             <br>
-            <br>
-            <button>ذخیره تغییرات</button>
+            <div class="col-span-12 flex justify-center mt-5 mb-4">
+                <button class="w-36 px-2 h-10 md:px-3 text-white bg-green-500 rounded-xl" type="submit">
+                    ذخیره تغییرات
+                </button>
+            </div>
         </form>
     </div>
 @endsection

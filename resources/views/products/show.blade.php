@@ -315,7 +315,7 @@
                 <div class="swiper-wrapper py-5">
                     <!-- PRODUCT ITEM -->
                     @foreach($relatedProducts as $product)
-                        @include('components.product');
+                        @include('components.product')
                     @endforeach
                 </div>
             </div>

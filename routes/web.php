@@ -11,6 +11,7 @@ Route::get('/', [IndexController::class,'index'])->name('index');
 Route::prefix('products')->controller(ProductController::class)->name('products.')->group(function (){
 
     Route::get('/','index')->name('index');
+    Route::get('remove-filter','removeFilter')->name('remove-filter');
     Route::get('{product}','show')->name('show');
 
 });

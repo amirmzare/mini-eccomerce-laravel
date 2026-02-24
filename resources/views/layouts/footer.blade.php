@@ -74,10 +74,10 @@
 
                 <div class="flex justify-center md:justify-end items-center gap-x-3  child:bg-gray-950 child:dark:bg-gray-900">
                         <span class="w-16 h-16 lg:w-20 lg:h-20 flex-center rounded-xl ">
-                            <img class="w-16 h-16" src="./assets/images/footer/1.png" alt="">
+                            <img class="w-16 h-16" src="{{asset('assets/images/footer/1.png')}}" alt="">
                         </span>
                     <span class="w-16 h-16 lg:w-20 lg:h-20 flex-center rounded-xl ">
-                            <img class="w-16 h-16" src="./assets/images/footer/2.png" alt="">
+                            <img class="w-16 h-16" src="{{asset('assets/images/footer/2.png')}}" alt="">
                         </span>
                 </div>
                 <!-- GO TOP -->
