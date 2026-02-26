@@ -7,34 +7,38 @@ use App\Models\Product;
 class CartService
 {
 
-    public static function add(int $productId, int $qty) : void
+    public static function add(int $productId, int $qty): void
     {
         $userCart = self::getItems();
 
-        $userCart [$productId] = [
-            'product_id' => $productId,
-            'qty' => $qty
-        ];
+        $product = Product::find($productId);  // throw exception
+        if ($product->qty != 0 && $product->qty >= $qty) {
+            $userCart [$productId] = [
+                'product_id' => $productId,
+                'qty' => $qty
+            ];
+            session([
+                'cart' => $userCart
+            ]);
+        }
 
-        session([
-            'cart' => $userCart
-        ]);
 
     }
 
-    public static function getCount() : int
+    public static function getCount(): int
     {
         $userCart = self::getItems();
 
         return count($userCart);
     }
 
-    public static function getItems() : array
+    public static function getItems(): array
     {
         return session('cart', []);
 
     }
-    public static function getItemsWithDetails() : array
+
+    public static function getItemsWithDetails(): array
     {
         $userCart = self::getItems();
 
@@ -45,7 +49,7 @@ class CartService
         return $userCart;
     }
 
-    public static function remove(int $productId) :void
+    public static function remove(int $productId): void
     {
         $userCart = self::getItems();
 
@@ -56,7 +60,7 @@ class CartService
         ]);
     }
 
-    public static function clear() :void
+    public static function clear(): void
     {
         session([
             'cart' => []
@@ -74,9 +78,9 @@ class CartService
         ]);
     }
 
-    public static function getTotalPrices() : array
+    public static function getTotalPrices(): array
     {
-        $userCart =self::getItemsWithDetails();
+        $userCart = self::getItemsWithDetails();
         $finalPrice = 0;
         $finalDiscount = 0;
 
@@ -92,11 +96,11 @@ class CartService
 
     }
 
-    public static function getCartProductQty(int $productId): int
+    public static function getCartProductQty(int $productId): int|null
     {
         $userCart = self::getItems();
 
-        return $userCart[$productId]['qty'];
+        return $userCart[$productId]['qty'] ?? null;
     }
 
 }

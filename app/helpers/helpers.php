@@ -70,3 +70,10 @@ if (!function_exists("iconCartCount")) {
     }
 }
 
+if (!function_exists("getProductQty")) {
+    function getProductQty(int $productId): null | int
+    {
+         return \App\Services\CartService::getCartProductQty($productId);
+    }
+}
+

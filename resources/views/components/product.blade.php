@@ -6,7 +6,7 @@
             <form action="{{route('cart.add')}}" method="POST">
                 @csrf
                 <input type="hidden" name="product_id" value="{{$product->id}}"/>
-                <input type="hidden" name="qty" value="1"/>
+                <input type="hidden" name="qty" value="{{getProductQty($product->id) ?? 1}}"/>
 
                 <div class="tooltip">
                     <button
@@ -26,10 +26,10 @@
         @if($product->discount)
             <!-- badge offer -->
             <span class="product-card_badge">
-                                    {{calcPercent($product->price , $product->discount)}}
-                                    %
-                                    تخفیف‌
-                                </span>
+                {{calcPercent($product->price , $product->discount)}}
+                %
+                تخفیف
+            </span>
         @endif
     </div>
     <!-- product img -->

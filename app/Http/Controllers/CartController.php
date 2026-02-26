@@ -6,7 +6,7 @@ use App\Http\Requests\OrderPostRequest;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class CartController extends Controller
 {
     public function index()
     {
@@ -19,6 +19,7 @@ class OrderController extends Controller
 
     public function add(OrderPostRequest $request)
     {
+        //try - catch
         CartService::add(
             $request->input('product_id'),
             $request->input('qty')

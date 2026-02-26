@@ -122,16 +122,16 @@
                         <div class="swiper MobileProductSlider w-full">
                             <div class="swiper-wrapper w-full child:w-full child:overflow-hidden child:rounded-lg">
                                 <div class="swiper-slide">
-                                    <img src="./images/products/11.png" alt="">
+                                    <img src="{{asset('assets/images/products/11.png')}}" alt="">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="./images/products/12.webp" alt="">
+                                    <img src="{{asset('assets/images/products/12.webp')}}" alt="">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="./images/products/13.webp" alt="">
+                                    <img src="{{asset('assets/images/products/13.webp')}}" alt="">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img src="./images/products/14.webp" alt="">
+                                    <img src="{{asset('assets/images/products/14.webp')}}" alt="">
                                 </div>
                             </div>
                             <div class="swiper-pagination MobileProductSlider-pagination"></div>
@@ -219,7 +219,7 @@
                         id="customInput"
                         min="1"
                         max="{{$product->qty}}"
-                        value="1"
+                        value="{{getProductQty($product->id)  ?? 1}}"
                         class="custom-input mr-4 text-lg bg-transparent"
                     />
                     <svg class="w-6 h-6 decrement text-red-500">
